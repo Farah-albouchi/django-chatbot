@@ -1,73 +1,141 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Chatbot</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
         }
+
         .chat-container {
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            overflow: hidden;
+        }
+
+        /* Header with logo and slogan */
+        .header {
+            background-color: #2196f3;
             padding: 20px;
+            display: flex;
+            align-items: center;
+            color: white;
         }
+
+        .header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .slogan {
+            font-size: 14px;
+            margin-left: 10px;
+            color: #cfe8ff;
+            font-style: italic;
+        }
+
         .chat-history {
-            height: 300px;
+            flex-grow: 1;
+            padding: 20px;
             overflow-y: auto;
-            border: 1px solid #eee;
-            padding: 10px;
-            margin-bottom: 20px;
+            background-color: #f9f9f9;
         }
+
         .message {
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
+            margin-bottom: 12px;
+            padding: 10px;
+            border-radius: 8px;
+            width: fit-content;
+            max-width: 70%;
+            font-size: 16px;
+            line-height: 1.4;
         }
+
         .user-message {
-            background-color: #e3f2fd;
-            margin-left: 20%;
+            background-color: #e1f5fe;
+            align-self: flex-end;
+            margin-left: auto;
         }
+
         .bot-message {
             background-color: #f5f5f5;
-            margin-right: 20%;
+            align-self: flex-start;
+            margin-right: auto;
         }
+
         .error-message {
             background-color: #ffebee;
             color: #c62828;
-            margin-right: 20%;
+            align-self: flex-start;
         }
+
         .input-container {
             display: flex;
-            gap: 10px;
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background-color: #fff;
         }
+
         #user-message {
             flex-grow: 1;
-            padding: 8px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
+
         button {
-            padding: 8px 20px;
+            padding: 12px 20px;
             background-color: #2196f3;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
         }
+
         button:disabled {
             background-color: #ccc;
-        }
-        .loading {
-            color: #666;
-            font-style: italic;
         }
     </style>
 </head>
 <body>
     <div class="chat-container">
-        <h1>IT Assistant</h1>
+        <div class="header">
+            <h1>IT Assistant</h1>
+            <span class="slogan">Your tech helper</span>
+        </div>
+
         <div class="chat-history" id="chat-history"></div>
+
         <div class="input-container">
             <input type="text" id="user-message" placeholder="Type your message..."
                    onkeypress="if(event.key === 'Enter' && !event.shiftKey) { event.preventDefault(); sendMessage(); }">
@@ -137,7 +205,6 @@
 
                 addMessage(data.response);
             } catch (error) {
-                // Remove loading message
                 chatHistory.removeChild(loadingDiv);
                 addMessage(error.message, 'error');
             } finally {

@@ -11,6 +11,7 @@ import time
 def get_chat_response(user_input):
     api_url = "https://chatgpt-api8.p.rapidapi.com/"
 
+
     payload = [
 	{
 		"content": "Hello! I'm an AI assistant bot based on ChatGPT 3. How may I help you?",
@@ -22,7 +23,7 @@ def get_chat_response(user_input):
 	}
     ]
     headers = {
-	"x-rapidapi-key": "6d1066720amsh569ceb4550b9323p1721b3jsnd3a80581d893",
+	"x-rapidapi-key": "220cbb2080msh1dcb5b16a1a0254p166484jsn8cb9ee69e94d",
 	"x-rapidapi-host": "chatgpt-api8.p.rapidapi.com",
 	"Content-Type": "application/json"
     }   
